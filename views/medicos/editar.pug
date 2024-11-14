@@ -1,0 +1,21 @@
+doctype html
+html
+  head
+    title Editar Médico
+    link(rel='stylesheet', href='https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css')
+  body
+    .container
+      h1 Editar Médico
+      form(method='POST', action=`/medicos/editar/${medico.idMedico}`)
+        .form-group
+          label(for='nombre') Nombre
+          input#nombre.form-control(type='text', name='nombre', value=medico.nombre)
+        .form-group
+          label(for='apellido') Apellido
+          input#apellido.form-control(type='text', name='apellido', value=medico.apellido)
+        .form-group
+          label(for='email') Email
+          input#email.form-control(type='email', name='email', value=medico.email)
+        button.btn.btn-primary(type='submit') Guardar cambios
+
+      a.btn.btn-secondary.mt-3(href="/medicos/gestionar-medicos") Volver a la gestión de médicos

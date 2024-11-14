@@ -1,0 +1,94 @@
+doctype html
+html(lang="es")
+    head
+        title Gestión de Turnos
+        link(rel="stylesheet", href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css")
+    body
+        .container
+            h1.text-center.my-4 Gestión de Turnos
+
+            form(action="/turnos/crear-turno", method="POST")
+                .form-group
+                    label(for="especialidad") Especialidad:
+                    select#especialidad.form-control(name="especialidad")
+                        option(value="" disabled selected) Seleccione una especialidad
+                        each especialidad in especialidades
+                            option(value=especialidad.idEspecialidad)= especialidad.nombre
+
+                .form-group
+                    label(for="medico") Médico:
+                    select#medico.form-control(name="medico", disabled=true)
+                        option(value="" disabled selected) Seleccione un médico
+
+                .form-group
+                    label(for="horario") Horario disponible:
+                    select#horario.form-control(name="horario", disabled=true)
+                        option(value="" disabled selected) Seleccione un horario
+
+                .form-group
+                    label(for="nombre") Nombre del paciente:
+                    input#nombre.form-control(type="text" name="nombre" required)
+
+                .form-group
+                    label(for="dni") DNI:
+                    input#dni.form-control(type="text" name="dni" required)
+
+                button.btn.btn-primary(type="submit") Reservar Turno
+
+        script.
+            document.getElementById('especialidad').addEventListener('change', function() {
+                var especialidadId = this.value;
+                var medicoSelect = document.getElementById('medico');
+                medicoSelect.disabled = true;
+                var horarioSelect = document.getElementById('horario');
+                horarioSelect.disabled = true;
+                horarioSelect.innerHTML = '<option value="" disabled selected>Seleccione un horario</option>';
+
+                if (especialidadId) {
+                    fetch(`/turnos/medicos/${especialidadId}`)
+                        .then(response => response.json())
+                        .then(medicos => {
+                            medicoSelect.disabled = false;
+                            medicoSelect.innerHTML = '<option value="" disabled selected>Seleccione un médico</option>';
+                            medicos.forEach(medico => {
+                                var option = document.createElement('option');
+                                option.value = medico.idMedico;
+                                option.textContent = `${medico.nombre} ${medico.apellido}`;
+                                medicoSelect.appendChild(option);
+                            });
+                        })
+                        .catch(error => {
+                            console.error('Error al obtener médicos:', error);
+                            alert('Hubo un problema al cargar los médicos.');
+                        });
+                }
+            });
+
+            document.getElementById('medico').addEventListener('change', function() {
+                var medicoId = this.value;
+                var horarioSelect = document.getElementById('horario');
+                horarioSelect.disabled = true;
+
+                if (medicoId) {
+                    fetch(`/turnos/horarios/${medicoId}`)
+                        .then(response => response.json())
+                        .then(horarios => {
+                            horarioSelect.disabled = false;
+                            horarioSelect.innerHTML = '<option value="" disabled selected>Seleccione un horario</option>';
+                            horarios.forEach(horario => {
+                                horario.diasHabiles.forEach(dia => {
+                                    horario.turnos.forEach(turno => {
+                                        var option = document.createElement('option');
+                                        option.value = horario.idAgenda;
+                                        option.textContent = `${dia} ${turno.horaInicio} - ${turno.horaFin}`;
+                                        horarioSelect.appendChild(option);
+                                    });
+                                });
+                            });
+                        })
+                        .catch(error => {
+                            console.error('Error al obtener horarios:', error);
+                            alert('Hubo un problema al cargar los horarios.');
+                        });
+                }
+            });

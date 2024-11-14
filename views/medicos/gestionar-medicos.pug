@@ -1,0 +1,38 @@
+doctype html
+html
+  head
+    title Gestión de Médicos
+    link(rel='stylesheet', href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css')
+  body
+    .container
+      h1.text-center.my-4 Gestión de Médicos
+
+      table.table.table-bordered
+        thead
+          tr
+            th Nombre
+            th Apellido
+            th Email
+            th Estado
+            th Acciones
+        tbody
+          each medico in medicos
+            tr(style=medico.estado === 0 ? 'text-decoration: line-through;' : '')  
+              td= medico.nombre
+              td= medico.apellido
+              td= medico.email
+              td
+                if medico.estado === 1
+                  span Activo
+                else
+                  span Inactivo
+              td
+                if medico.estado === 1  
+                  a.btn.btn-warning(href=`/medicos/editar/${medico.idMedico}`) Editar
+                  a.btn.btn-danger.ml-2(href=`/medicos/inhabilitar/${medico.idMedico}`) Inhabilitar
+                else  
+                  a.btn.btn-success(href=`/medicos/habilitar/${medico.idMedico}`) Habilitar
+                  span.text-muted No disponible
+
+      .text-center.mt-4
+        a.btn.btn-primary(href='/medicos/crear') Agregar Médico

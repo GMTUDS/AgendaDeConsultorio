@@ -1,0 +1,25 @@
+html 
+    head 
+
+    body 
+
+block content
+  h1 Lista de Médicos
+  table
+    thead
+      tr
+        th Nombre
+        th Especialidad
+        th Teléfono
+        th Email
+        th Acciones
+    tbody
+      each medico in medicos
+        tr
+          td= medico.nombre
+          td= medico.especialidad
+          td= medico.telefono
+          td= medico.email
+          td
+            a(href=`/medicos/editar/${medico.id}`) Editar
+            a(href=`/medicos/eliminar/${medico.id}`) Eliminar
