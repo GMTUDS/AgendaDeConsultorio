@@ -1,16 +1,85 @@
 doctype html
 html(lang="es")
-    head
-        title Agenda de Consultas Médicas 
-        link(rel="stylesheet", href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css") 
-    body 
-        .container.text-center 
-            h1.mt-5 "Agenda de Consultas Médicas" 
-            .row.mt-4 
-                .col-md-6 
-                    a.btn.btn-primary.btn-lg(href="/medicos/gestionar-medicos") Gestión de Médicos 
-                .col-md-6 
-                    a.btn.btn-secondary.btn-lg(href="/turnos") Turnos 
-        script(src="https://code.jquery.com/jquery-3.5.1.slim.min.js") 
-        script(src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js")
-        script(src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js")
+  head
+    title Agenda de Consultas Médicas
+    link(rel="stylesheet", href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css")
+    link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css")
+    style.
+      /* Fondo suave para la página */
+      body {
+        background-color: #f8f9fa;
+      }
+      /* Estilo del encabezado */
+      h1.mt-5 {
+        font-family: 'Arial', sans-serif;
+        font-weight: bold;
+        color: #007bff;
+        font-size: 2.5rem;
+      }
+      /* Espaciado general */
+      .container {
+        max-width: 900px;
+      }
+      .row.mt-4 {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+      }
+      /* Estilo para los botones */
+      .btn-lg {
+        font-size: 1.2rem;
+        padding: 15px 30px;
+        text-transform: uppercase;
+        font-weight: bold;
+        width: 100%;
+        border-radius: 8px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+      .btn-lg:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      }
+      /* Estilos para los botones específicos */
+      .btn-primary {
+        background-color: #007bff;
+        border-color: #007bff;
+      }
+      .btn-primary:hover {
+        background-color: #0056b3;
+        border-color: #004085;
+      }
+      .btn-secondary {
+        background-color: #6c757d;
+        border-color: #6c757d;
+      }
+      .btn-secondary:hover {
+        background-color: #5a6268;
+        border-color: #545b62;
+      }
+      /* Estilos adicionales para el ícono */
+      .btn i {
+        margin-right: 10px;
+      }
+      /* Agregar sombra a los botones */
+      .btn-lg {
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      }
+      /* Mejorar el espaciado entre el contenido */
+      .row.mt-4 {
+        margin-top: 40px;
+      }
+  body
+    .container.text-center
+      h1.mt-5 "Agenda de Consultas Médicas"
+      .row.mt-4
+        .col-md-6
+          a.btn.btn-primary.btn-lg(href="/medicos/gestionar-medicos")
+            i.fas.fa-user-md.mr-2
+            | Gestión de Médicos
+        .col-md-6
+          a.btn.btn-secondary.btn-lg(href="/turnos")
+            i.fas.fa-calendar-check.mr-2
+            | Turnos
+    script(src="https://code.jquery.com/jquery-3.5.1.slim.min.js")
+    script(src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js")
+    script(src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js")
