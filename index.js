@@ -7,10 +7,10 @@ const app = express();
 // Conexión a la BD
 const conndb = mysql.createConnection({
     port: 3306,
-    host: 'localhost',
-    user: 'root',
-    password: '',
-    database: 'agconsultorio'
+    host: 'bq0vxmjkkq4tho6n4au6-mysql.services.clever-cloud.com',
+    user: 'uyuwg0zoognbqzme',
+    password: '2jd0oxl1Q3zCYHpPgbEU',
+    database: 'bq0vxmjkkq4tho6n4au6'
 });
 
 conndb.connect((err) => {
